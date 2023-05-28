@@ -20,12 +20,16 @@ export default class Vector {
     return new Vector(this.x - vector.x, this.y - vector.y);
   }
 
-  lengthSquared() {
-    return this.x * this.x + this.y * this.y;
+  to(vector) {
+    return new Vector(vector.x - this.x, vector.y - this.y);
   }
-  
+
   magnify(scalar) {
     this.x *= scalar;
     this.y *= scalar;
+  }
+
+  lengthSquared() {
+    return this.x * this.x + this.y * this.y;
   }
 }
