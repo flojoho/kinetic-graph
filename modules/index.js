@@ -7,10 +7,10 @@ var c = canvas.getContext('2d');
 
 const fps = 60;
 
-const nodeCount = 15;
-const radius = 10;
+const nodeCount = 10;
+const radius = 60;
 const repulsion = 20;
-const damping = 0.99;
+const damping = 0.9;
 
 const physicsLoop = nodes => {
   const accelerationVectors = nodes.map(node => new Vector (0, 0));
