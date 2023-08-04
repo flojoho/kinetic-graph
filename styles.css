@@ -1,4 +1,17 @@
 
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --black: #222222;
+  --white: #dddddd;
+}
+
+body {
+  background-color: var(--black);
+}
+
 #nodesDiv {
   position: fixed;
   width: 100vw;
@@ -8,6 +21,17 @@
 }
 
 .node {
-  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px var(--white) solid;
+  background-color: var(--black);
   position: fixed;
+  border-radius: 50%;
+  color: var(--white);
+  font-size: 1.4rem;
+  font-family: monospace;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
 }

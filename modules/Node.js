@@ -13,8 +13,8 @@ export default class Node {
   constructor() {
     this.pos = new Vector(Math.random() * viewportWidth, Math.random() * viewportHeight);
     this.vel = new Vector(0, 0);
-    this.width = 100;
-    this.height = 100;
+    this.width = 150;
+    this.height = 150;
     this.render()
   }
 
@@ -23,6 +23,7 @@ export default class Node {
     this.#div.classList.add('node');
     this.#div.style.width = `${this.width}px`;
     this.#div.style.height = `${this.height}px`;
+    this.#div.textContent = 'here is some longer text';
     nodesDiv.appendChild(this.#div);
   }
 
