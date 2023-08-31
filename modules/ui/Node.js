@@ -1,15 +1,20 @@
-import Vector from './Vector.js';
+import Vector from '../Vector.js';
 
-const nodesDiv = document.getElementById('nodesDiv');
+const stage = document.getElementById('stage');
 
-const stageWidth = nodesDiv.offsetWidth;
-const stageHeight = nodesDiv.offsetHeight;
+const stageWidth = stage.offsetWidth;
+const stageHeight = stage.offsetHeight;
 
 export default class Node {
   #div = null;
   
-  constructor() {
-    this.pos = new Vector(Math.random() * stageWidth, Math.random() * stageHeight);
+  constructor(x, y) {
+    if(typeof x === 'number' && typeof y === 'number') {
+      this.pos = new Vector(x, y);
+    } else {
+      this.pos = new Vector(Math.random() * stageWidth, Math.random() * stageHeight);
+    }
+    
     this.vel = new Vector(0, 0);
     this.width = 150;
     this.height = 150;
@@ -22,7 +27,7 @@ export default class Node {
     this.#div.style.width = `${this.width}px`;
     this.#div.style.height = `${this.height}px`;
     this.#div.textContent = 'here is some longer text';
-    nodesDiv.appendChild(this.#div);
+    stage.appendChild(this.#div);
   }
 
   refresh() {
