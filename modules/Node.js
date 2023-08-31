@@ -2,16 +2,14 @@ import Vector from './Vector.js';
 
 const nodesDiv = document.getElementById('nodesDiv');
 
-const viewportWidth = window.innerWidth;
-const viewportHeight = window.innerHeight;
-
-console.log('viewportWidth:', viewportWidth)
+const stageWidth = nodesDiv.offsetWidth;
+const stageHeight = nodesDiv.offsetHeight;
 
 export default class Node {
   #div = null;
   
   constructor() {
-    this.pos = new Vector(Math.random() * viewportWidth, Math.random() * viewportHeight);
+    this.pos = new Vector(Math.random() * stageWidth, Math.random() * stageHeight);
     this.vel = new Vector(0, 0);
     this.width = 150;
     this.height = 150;
@@ -37,18 +35,18 @@ export default class Node {
       this.vel.x = 0;
       this.pos.x = -(this.pos.x - this.width/2) + this.width/2;
     }
-    if(this.pos.x > (viewportWidth - this.width/2)) {
+    if(this.pos.x > (stageWidth - this.width/2)) {
       this.vel.x = 0;
-      this.pos.x = (viewportWidth - (this.pos.x - viewportWidth + this.width/2)) - this.width/2;
+      this.pos.x = (stageWidth - (this.pos.x - stageWidth + this.width/2)) - this.width/2;
     }
 
     if(this.pos.y < this.height/2) {
       this.vel.y = 0;
       this.pos.y = -(this.pos.y - this.height/2) + this.height/2;
     }
-    if(this.pos.y > (viewportHeight - this.height/2)) {
+    if(this.pos.y > (stageHeight - this.height/2)) {
       this.vel.y = 0;
-      this.pos.y = viewportHeight - (this.pos.y - viewportHeight + this.height/2) - this.height/2;
+      this.pos.y = stageHeight - (this.pos.y - stageHeight + this.height/2) - this.height/2;
     }
   }
 }

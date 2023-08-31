@@ -4,29 +4,37 @@
 }
 
 :root {
-  --black: #222222;
+  --black: #000000;
+  --dark-gray: #222222;
   --white: #dddddd;
 }
 
 body {
   background-color: var(--black);
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
 }
 
 #nodesDiv {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
+  flex: 1;
+  position: relative;
+}
+
+aside {
+  width: 320px;
+  background-color: var(--dark-gray);
 }
 
 .node {
   display: flex;
+  position: absolute;
   justify-content: center;
   align-items: center;
   border: 2px var(--white) solid;
-  background-color: var(--black);
-  position: fixed;
+  background-color: var(--dark-gray);
   border-radius: 50%;
   color: var(--white);
   font-size: 1.4rem;
