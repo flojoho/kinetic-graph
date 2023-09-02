@@ -1,5 +1,6 @@
 import Vector from '../Vector.js';
 import Node from './Node.js';
+import Properties from './Properties.js';
 
 const stage = document.getElementById('stage');
 
@@ -60,10 +61,19 @@ setInterval(() => {
 
 stage.addEventListener('click', e => {
   
-  const rect = e.target.getBoundingClientRect();
+  const rect = stage.getBoundingClientRect();
 
   const x = e.clientX - rect.left;
   const y = e.clientY - rect.top;
+
+  const newNode = new Node(x, y);
   
-  nodes.push(new Node(x, y));
+  nodes.push(newNode);
+  Properties.selectNode(newNode);
 });
+
+const getNodes = () => {
+  return [...nodes];
+}
+
+export default { getNodes };

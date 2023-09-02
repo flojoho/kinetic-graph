@@ -1,4 +1,5 @@
 import Vector from '../Vector.js';
+import Properties from './Properties.js';
 
 const stage = document.getElementById('stage');
 
@@ -18,7 +19,14 @@ export default class Node {
     this.vel = new Vector(0, 0);
     this.width = 150;
     this.height = 150;
-    this.render()
+    this.text = 'some text'
+    this.render();
+
+    this.#div.addEventListener('click', e => {
+      e.stopPropagation();
+      
+      Properties.selectNode(this);
+    });
   }
 
   render() {
@@ -26,7 +34,7 @@ export default class Node {
     this.#div.classList.add('node');
     this.#div.style.width = `${this.width}px`;
     this.#div.style.height = `${this.height}px`;
-    this.#div.textContent = 'here is some longer text';
+    this.#div.textContent = this.text;
     stage.appendChild(this.#div);
   }
 
@@ -53,5 +61,18 @@ export default class Node {
       this.vel.y = 0;
       this.pos.y = stageHeight - (this.pos.y - stageHeight + this.height/2) - this.height/2;
     }
+  }
+
+  enableHighlight() {
+    this.#div.style.boxShadow = '0px 0px 50px var(--white)';
+  }
+
+  disableHightlight() {
+    this.#div.style.boxShadow = 'none';
+  }
+
+  changeText(text) {
+    this.text = text;
+    this.#div.textContent = text;
   }
 }
