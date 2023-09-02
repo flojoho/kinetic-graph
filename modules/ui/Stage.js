@@ -6,7 +6,7 @@ const stage = document.getElementById('stage');
 
 const fps = 60;
 
-const nodeCount = 10;
+const nodeCount = 2;
 const repulsionCoefficient = 20;
 const damping = 0.9;
 
@@ -60,7 +60,6 @@ setInterval(() => {
 }, 1000/fps);
 
 stage.addEventListener('click', e => {
-  
   const rect = stage.getBoundingClientRect();
 
   const x = e.clientX - rect.left;
@@ -70,6 +69,7 @@ stage.addEventListener('click', e => {
   
   nodes.push(newNode);
   Properties.selectNode(newNode);
+  Properties.editText();
 });
 
 const getNodes = () => {

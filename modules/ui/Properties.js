@@ -11,12 +11,14 @@ const selectNode = (node) => {
   node.enableHighlight();
 
   nodeText.value = node.text;
+}
 
-  nodeText.focus();
+const editText = () => {
+  nodeText.select();
 }
 
 nodeText.addEventListener('input', () => {
   selectedNode.changeText(nodeText.value);
 });
 
-export default { selectNode };
+export default { selectNode, editText };

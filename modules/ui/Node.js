@@ -24,8 +24,13 @@ export default class Node {
 
     this.#div.addEventListener('click', e => {
       e.stopPropagation();
-      
+
       Properties.selectNode(this);
+    });
+    this.#div.addEventListener('dblclick', e => {
+      e.stopPropagation();
+      
+      Properties.editText();
     });
   }
 
