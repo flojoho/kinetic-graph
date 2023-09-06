@@ -7,7 +7,7 @@ let selectedNode;
 const selectNode = (node) => {
   selectedNode = node;
 
-  Nodes.getNodes().forEach(node => node.disableHightlight());
+  Nodes.get().forEach(node => node.disableHightlight());
   node.enableHighlight();
 
   nodeText.value = node.text;
