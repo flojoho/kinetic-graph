@@ -1,4 +1,4 @@
-import Stage from './Stage.js';
+import Nodes from './Nodes.js';
 
 const nodeText = document.getElementById('node-text');
 
@@ -7,7 +7,7 @@ let selectedNode;
 const selectNode = (node) => {
   selectedNode = node;
 
-  Stage.getNodes().forEach(node => node.disableHightlight());
+  Nodes.getNodes().forEach(node => node.disableHightlight());
   node.enableHighlight();
 
   nodeText.value = node.text;

@@ -2,7 +2,7 @@ import Vector from '../Vector.js';
 import Node from './Node.js';
 import Properties from './Properties.js';
 
-const stage = document.getElementById('stage');
+const nodeContainer = document.getElementById('node-container');
 
 const fps = 60;
 
@@ -59,8 +59,8 @@ setInterval(() => {
 
 }, 1000/fps);
 
-stage.addEventListener('click', e => {
-  const rect = stage.getBoundingClientRect();
+nodeContainer.addEventListener('click', e => {
+  const rect = nodeContainer.getBoundingClientRect();
 
   const x = e.clientX - rect.left;
   const y = e.clientY - rect.top;

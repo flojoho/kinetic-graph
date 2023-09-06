@@ -14,6 +14,8 @@
   color: var(--white);
 }
 
+
+
 body {
   background-color: var(--black);
   display: flex;
@@ -23,7 +25,7 @@ body {
   margin: 0;
 }
 
-#stage {
+main {
   flex: 1;
   position: relative;
 }
@@ -42,6 +44,31 @@ aside>div {
   border-bottom: 2px var(--black) solid;
 }
 
+input {
+  background-color: var(--black);
+  border: 1px var(--white) solid;
+  width: 100%;
+}
+
+button {
+  background-color: var(--black);
+  border: 1px var(--white) solid;
+}
+
+
+
+#edge-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#node-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
 .node {
   display: flex;
   position: absolute;
@@ -55,15 +82,4 @@ aside>div {
   padding: 10px;
   text-align: center;
   cursor: pointer;
-}
-
-input {
-  background-color: var(--black);
-  border: 1px var(--white) solid;
-  width: 100%;
-}
-
-button {
-  background-color: var(--black);
-  border: 1px var(--white) solid;
 }

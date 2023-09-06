@@ -1,10 +1,10 @@
 import Vector from '../Vector.js';
 import Properties from './Properties.js';
 
-const stage = document.getElementById('stage');
+const nodeConatainer = document.getElementById('node-container');
 
-const stageWidth = stage.offsetWidth;
-const stageHeight = stage.offsetHeight;
+const stageWidth = nodeConatainer.offsetWidth;
+const stageHeight = nodeConatainer.offsetHeight;
 
 export default class Node {
   #div = null;
@@ -40,7 +40,7 @@ export default class Node {
     this.#div.style.width = `${this.width}px`;
     this.#div.style.height = `${this.height}px`;
     this.#div.textContent = this.text;
-    stage.appendChild(this.#div);
+    nodeConatainer.appendChild(this.#div);
   }
 
   refresh() {
