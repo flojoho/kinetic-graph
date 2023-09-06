@@ -5,11 +5,11 @@ import Edges from './ui/Edges.js';
 
 const fps = 60;
 
-const nodeCount = 2;
 const repulsionCoefficient = 20;
+const attractionCoefficient = 0.0004;
 const damping = 0.9;
 
-const physicsLoop = nodes => {
+const physicsLoop = (nodes, edges) => {
 
   // refactor:
   // calculate new node velocities
@@ -18,20 +18,31 @@ const physicsLoop = nodes => {
 
 
 
-  const accelerationVectors = nodes.map(node => new Vector (0, 0));
+  const totalForces = new Map();
+  nodes.forEach(node => totalForces.set(node, new Vector(0, 0)));
 
   for(let i = 0; i < nodes.length; i++) {
     for(let j = i + 1; j < nodes.length; j++) {
       let acceleration = nodes[j].pos.to(nodes[i].pos);
       acceleration.magnify(repulsionCoefficient / acceleration.lengthSquared());
 
-      accelerationVectors[i].add(acceleration);
-      accelerationVectors[j].subtract(acceleration);
+      totalForces.get(nodes[i]).add(acceleration);
+      totalForces.get(nodes[j]).subtract(acceleration);
     }
   }
 
+  edges.forEach(edge => {
+    const { node1, node2 } = edge;
+
+    let acceleration = node1.pos.to(node2.pos);
+    acceleration.magnify(attractionCoefficient);
+
+    totalForces.get(node1).add(acceleration);
+    totalForces.get(node2).subtract(acceleration);
+  });
+
   nodes = nodes.map((node, i) => {
-    node.vel.add(accelerationVectors[i]);
+    node.vel.add(totalForces.get(node));
     return node;
   })
   .map((node) => {
@@ -40,7 +51,6 @@ const physicsLoop = nodes => {
   })
   .map(node => {
     node.vel.magnify(damping);
-
     return node;
   })
   .map(node => {
@@ -49,13 +59,12 @@ const physicsLoop = nodes => {
 }
 
 setInterval(() => {
-
   const nodes = Nodes.get();
+  const edges = Edges.get();
 
-  physicsLoop(nodes);
+  physicsLoop(nodes, edges);
 
   nodes.forEach(node => node.refresh());
-
-  Edges.get().forEach(edge => edge.refresh());
+  edges.forEach(edge => edge.refresh());
 
 }, 1000/fps);

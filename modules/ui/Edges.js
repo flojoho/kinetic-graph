@@ -15,10 +15,6 @@ class Edge {
 
   render() {
     const line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-    line.setAttribute('x1', 100);
-    line.setAttribute('y1', 100);
-    line.setAttribute('x2', 200);
-    line.setAttribute('y2', 100);
     line.setAttribute('style', 'stroke: var(--white); stroke-width: var(--stroke-width)');
     
     edgeContainer.appendChild(line);
