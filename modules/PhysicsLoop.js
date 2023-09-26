@@ -5,9 +5,9 @@ import Edges from './ui/Edges.js';
 
 const fps = 60;
 
-const repulsionCoefficient = 20;
-const attractionCoefficient = 0.0004;
-const damping = 0.9;
+const repulsionCoefficient = 100;
+const attractionCoefficient = 0.002;
+const damping = 0.95;
 
 const physicsLoop = (nodes, edges) => {
 
