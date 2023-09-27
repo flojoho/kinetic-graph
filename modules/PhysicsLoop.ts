@@ -1,6 +1,8 @@
 
 import Vector from './Vector.js';
 import Nodes from './ui/Nodes.js';
+import Node from './ui/Node.js';
+import Edge from './ui/Edge.js';
 import Edges from './ui/Edges.js';
 
 const fps = 60;
@@ -9,7 +11,7 @@ const repulsionCoefficient = 100;
 const attractionCoefficient = 0.002;
 const damping = 0.95;
 
-const physicsLoop = (nodes, edges) => {
+const physicsLoop = (nodes: Node[], edges: Edge[]) => {
 
   // refactor:
   // calculate new node velocities
