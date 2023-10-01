@@ -7,7 +7,6 @@ const nodes = Nodes.get();
 const edges = [
     new Edge(nodes[0], nodes[1])
 ];
-edges.forEach(edge => edge.render());
 const get = () => {
     return edges;
 };

@@ -8,6 +8,7 @@ const stageHeight = nodeConatainer.offsetHeight;
 
 export default class Node {
   #div = null;
+  pos: Vector;
   
   constructor(x: number, y: number) {
     if(typeof x === 'number' && typeof y === 'number') {

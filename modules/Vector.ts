@@ -1,30 +1,33 @@
 
 
 export default class Vector {
-  constructor(x, y) {
+  x: number;
+  y: number
+  
+  constructor(x: number, y: number) {
     this.x = x;
     this.y = y;
   }
 
-  add(vector) {
+  add(vector: Vector) {
     this.x += vector.x;
     this.y += vector.y;
   }
 
-  subtract(vector) {
+  subtract(vector: Vector) {
     this.x -= vector.x;
     this.y -= vector.y;
   }
 
-  minus(vector) {
+  minus(vector: Vector) {
     return new Vector(this.x - vector.x, this.y - vector.y);
   }
 
-  to(vector) {
+  to(vector: Vector) {
     return new Vector(vector.x - this.x, vector.y - this.y);
   }
 
-  magnify(scalar) {
+  magnify(scalar: number) {
     this.x *= scalar;
     this.y *= scalar;
   }
