@@ -60,6 +60,7 @@ const physicsLoop = (nodes: Node[], edges: Edge[]) => {
   })
   .map(node => {
     node.resolveWallCollision();
+    return node;
   });
 }
 

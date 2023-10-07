@@ -8,9 +8,12 @@ const stageWidth = nodeContainer.offsetWidth;
 const stageHeight = nodeContainer.offsetHeight;
 
 export default class Node {
-  #div = null;
+  private div = null;
   pos: Vector;
   vel: Vector;
+  width: number;
+  height: number;
+  text: String;
   
   constructor(x: number, y: number) {
     if(typeof x === 'number' && typeof y === 'number') {
@@ -25,13 +28,13 @@ export default class Node {
     this.text = 'some text'
     this.render();
 
-    this.#div.addEventListener('click', e => {
+    this.div.addEventListener('click', e => {
       e.stopPropagation();
 
       Properties.selectNode(this);
     });
 
-    this.#div.addEventListener('mousedown', e => {
+    this.div.addEventListener('mousedown', e => {
       e.preventDefault();
       e.stopPropagation();
 
@@ -40,7 +43,7 @@ export default class Node {
       }
     });
 
-    this.#div.addEventListener('dblclick', e => {
+    this.div.addEventListener('dblclick', e => {
       e.stopPropagation();
       
       Properties.editText();
@@ -48,17 +51,17 @@ export default class Node {
   }
 
   render() {
-    this.#div = document.createElement('div');
-    this.#div.classList.add('node');
-    this.#div.style.width = `${this.width}px`;
-    this.#div.style.height = `${this.height}px`;
-    this.#div.textContent = this.text;
-    nodeContainer.appendChild(this.#div);
+    this.div = document.createElement('div');
+    this.div.classList.add('node');
+    this.div.style.width = `${this.width}px`;
+    this.div.style.height = `${this.height}px`;
+    this.div.textContent = this.text;
+    nodeContainer.appendChild(this.div);
   }
 
   refresh() {
-    this.#div.style.left = `${this.pos.x - this.width/2}px`;
-    this.#div.style.top = `${this.pos.y - this.height/2}px`;
+    this.div.style.left = `${this.pos.x - this.width/2}px`;
+    this.div.style.top = `${this.pos.y - this.height/2}px`;
   }
 
   resolveWallCollision() {
@@ -82,15 +85,15 @@ export default class Node {
   }
 
   enableHighlight() {
-    this.#div.style.boxShadow = '0px 0px 50px var(--white)';
+    this.div.style.boxShadow = '0px 0px 50px var(--white)';
   }
 
   disableHightlight() {
-    this.#div.style.boxShadow = 'none';
+    this.div.style.boxShadow = 'none';
   }
 
-  changeText(text) {
+  changeText(text: String) {
     this.text = text;
-    this.#div.textContent = text;
+    this.div.textContent = text;
   }
 }

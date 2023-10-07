@@ -3,7 +3,7 @@ import Node from './Node.js';
 import Properties from './Properties.js';
 const nodeContainer = document.getElementById('node-container');
 const nodeCount = 2;
-let nodes = Array(nodeCount).fill().map(node => new Node());
+let nodes = Array(nodeCount).fill(0).map(node => new Node());
 nodeContainer.addEventListener('mousedown', e => {
     e.preventDefault();
     const { x, y } = toStageCoordinates(e.clientX, e.clientY);

@@ -42,6 +42,7 @@ const physicsLoop = (nodes, edges) => {
     })
         .map(node => {
         node.resolveWallCollision();
+        return node;
     });
 };
 setInterval(() => {

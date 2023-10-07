@@ -1,12 +1,12 @@
 import Vector from "../Vector";
 import Node from "./Node";
 
-const edgeContainer = document.getElementById('edge-container');
+const edgeContainer = document.getElementById('edge-container') as HTMLElement;
 
 export default class Edge {
   private edgeView: EdgeView;
-  private node1: Node;
-  private node2: Node;
+  node1: Node;
+  node2: Node;
 
   constructor(node1: Node, node2: Node) {
     this.node1 = node1;
