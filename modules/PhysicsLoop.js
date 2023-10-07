@@ -1,6 +1,7 @@
 import Vector from './Vector.js';
 import Nodes from './ui/Nodes.js';
 import Edges from './ui/Edges.js';
+import NodeDragger from './NodeDragger.js';
 const fps = 60;
 const repulsionCoefficient = 100;
 const attractionCoefficient = 0.002;
@@ -30,6 +31,8 @@ const physicsLoop = (nodes, edges) => {
         return node;
     })
         .map((node) => {
+        if (NodeDragger.node === node)
+            return node;
         node.pos.add(node.vel);
         return node;
     })

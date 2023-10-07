@@ -12,9 +12,10 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
 var _Node_div;
 import Vector from '../Vector.js';
 import Properties from './Properties.js';
-const nodeConatainer = document.getElementById('node-container');
-const stageWidth = nodeConatainer.offsetWidth;
-const stageHeight = nodeConatainer.offsetHeight;
+import NodeDragger from '../NodeDragger.js';
+const nodeContainer = document.getElementById('node-container');
+const stageWidth = nodeContainer.offsetWidth;
+const stageHeight = nodeContainer.offsetHeight;
 export default class Node {
     constructor(x, y) {
         _Node_div.set(this, null);
@@ -33,6 +34,13 @@ export default class Node {
             e.stopPropagation();
             Properties.selectNode(this);
         });
+        __classPrivateFieldGet(this, _Node_div, "f").addEventListener('mousedown', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            if ('node' === 'node') { // TODO: add toolbar logic
+                NodeDragger.node = this;
+            }
+        });
         __classPrivateFieldGet(this, _Node_div, "f").addEventListener('dblclick', e => {
             e.stopPropagation();
             Properties.editText();
@@ -44,7 +52,7 @@ export default class Node {
         __classPrivateFieldGet(this, _Node_div, "f").style.width = `${this.width}px`;
         __classPrivateFieldGet(this, _Node_div, "f").style.height = `${this.height}px`;
         __classPrivateFieldGet(this, _Node_div, "f").textContent = this.text;
-        nodeConatainer.appendChild(__classPrivateFieldGet(this, _Node_div, "f"));
+        nodeContainer.appendChild(__classPrivateFieldGet(this, _Node_div, "f"));
     }
     refresh() {
         __classPrivateFieldGet(this, _Node_div, "f").style.left = `${this.pos.x - this.width / 2}px`;
@@ -53,19 +61,19 @@ export default class Node {
     resolveWallCollision() {
         if (this.pos.x < this.width / 2) {
             this.vel.x = 0;
-            this.pos.x = -(this.pos.x - this.width / 2) + this.width / 2;
+            this.pos.x = this.width / 2;
         }
         if (this.pos.x > (stageWidth - this.width / 2)) {
             this.vel.x = 0;
-            this.pos.x = (stageWidth - (this.pos.x - stageWidth + this.width / 2)) - this.width / 2;
+            this.pos.x = stageWidth - this.width / 2;
         }
         if (this.pos.y < this.height / 2) {
             this.vel.y = 0;
-            this.pos.y = -(this.pos.y - this.height / 2) + this.height / 2;
+            this.pos.y = this.height / 2;
         }
         if (this.pos.y > (stageHeight - this.height / 2)) {
             this.vel.y = 0;
-            this.pos.y = stageHeight - (this.pos.y - stageHeight + this.height / 2) - this.height / 2;
+            this.pos.y = stageHeight - this.height / 2;
         }
     }
     enableHighlight() {

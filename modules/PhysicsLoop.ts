@@ -4,6 +4,7 @@ import Nodes from './ui/Nodes.js';
 import Node from './ui/Node.js';
 import Edge from './ui/Edge.js';
 import Edges from './ui/Edges.js';
+import NodeDragger from './NodeDragger.js';
 
 const fps = 60;
 
@@ -48,6 +49,8 @@ const physicsLoop = (nodes: Node[], edges: Edge[]) => {
     return node;
   })
   .map((node) => {
+    if(NodeDragger.node === node) return node;
+
     node.pos.add(node.vel);
     return node;
   })

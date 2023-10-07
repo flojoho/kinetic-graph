@@ -1,14 +1,16 @@
 import Vector from '../Vector.js';
 import Properties from './Properties.js';
+import NodeDragger from '../NodeDragger.js';
 
-const nodeConatainer = document.getElementById('node-container');
+const nodeContainer = document.getElementById('node-container') as HTMLElement;
 
-const stageWidth = nodeConatainer.offsetWidth;
-const stageHeight = nodeConatainer.offsetHeight;
+const stageWidth = nodeContainer.offsetWidth;
+const stageHeight = nodeContainer.offsetHeight;
 
 export default class Node {
   #div = null;
   pos: Vector;
+  vel: Vector;
   
   constructor(x: number, y: number) {
     if(typeof x === 'number' && typeof y === 'number') {
@@ -28,6 +30,16 @@ export default class Node {
 
       Properties.selectNode(this);
     });
+
+    this.#div.addEventListener('mousedown', e => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if('node' === 'node') { // TODO: add toolbar logic
+        NodeDragger.node = this;
+      }
+    });
+
     this.#div.addEventListener('dblclick', e => {
       e.stopPropagation();
       
@@ -41,7 +53,7 @@ export default class Node {
     this.#div.style.width = `${this.width}px`;
     this.#div.style.height = `${this.height}px`;
     this.#div.textContent = this.text;
-    nodeConatainer.appendChild(this.#div);
+    nodeContainer.appendChild(this.#div);
   }
 
   refresh() {
@@ -52,20 +64,20 @@ export default class Node {
   resolveWallCollision() {
     if(this.pos.x < this.width/2) {
       this.vel.x = 0;
-      this.pos.x = -(this.pos.x - this.width/2) + this.width/2;
+      this.pos.x = this.width/2;
     }
     if(this.pos.x > (stageWidth - this.width/2)) {
       this.vel.x = 0;
-      this.pos.x = (stageWidth - (this.pos.x - stageWidth + this.width/2)) - this.width/2;
+      this.pos.x = stageWidth - this.width/2;
     }
 
     if(this.pos.y < this.height/2) {
       this.vel.y = 0;
-      this.pos.y = -(this.pos.y - this.height/2) + this.height/2;
+      this.pos.y = this.height/2;
     }
     if(this.pos.y > (stageHeight - this.height/2)) {
       this.vel.y = 0;
-      this.pos.y = stageHeight - (this.pos.y - stageHeight + this.height/2) - this.height/2;
+      this.pos.y = stageHeight - this.height/2;
     }
   }
 

@@ -1,12 +1,12 @@
+import Vector from '../Vector.js';
 import Node from './Node.js';
 import Properties from './Properties.js';
 const nodeContainer = document.getElementById('node-container');
 const nodeCount = 2;
 let nodes = Array(nodeCount).fill().map(node => new Node());
-nodeContainer.addEventListener('click', e => {
-    const rect = nodeContainer.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+nodeContainer.addEventListener('mousedown', e => {
+    e.preventDefault();
+    const { x, y } = toStageCoordinates(e.clientX, e.clientY);
     const newNode = new Node(x, y);
     nodes.push(newNode);
     Properties.selectNode(newNode);
@@ -15,4 +15,8 @@ nodeContainer.addEventListener('click', e => {
 const get = () => {
     return [...nodes];
 };
-export default { get };
+const toStageCoordinates = (clientX, clientY) => {
+    const rect = nodeContainer.getBoundingClientRect();
+    return new Vector(clientX - rect.left, clientY - rect.top);
+};
+export default { get, toStageCoordinates };
