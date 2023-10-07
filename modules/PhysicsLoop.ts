@@ -26,6 +26,12 @@ const physicsLoop = (nodes: Node[], edges: Edge[]) => {
 
   for(let i = 0; i < nodes.length; i++) {
     for(let j = i + 1; j < nodes.length; j++) {
+
+      if(nodes[i].pos.x === nodes[j].pos.x && nodes[i].pos.y === nodes[j].pos.y) {
+        console.log('same');
+        nodes[i].pos.add(new Vector(10*Math.random(), 10*Math.random()));
+      }
+
       let acceleration = nodes[j].pos.to(nodes[i].pos);
       acceleration.magnify(repulsionCoefficient / acceleration.lengthSquared());
 
