@@ -6,17 +6,25 @@ const edgeButton = document.getElementById('edge-button') as HTMLElement;
 
 export default class Toolbar {
   static mode: Mode = 'edge';
+
+  static setMode(mode: Mode) {
+    Toolbar.mode = mode;
+
+    if(mode === 'node') {
+      nodeButton.classList.add('button-active');
+      edgeButton.classList.remove('button-active');
+    } else if(mode === 'edge') {
+      nodeButton.classList.remove('button-active');
+      edgeButton.classList.add('button-active');
+    }
+  }
 }
 
-nodeButton.addEventListener('click', e => {
-  Toolbar.mode = 'node';
+Toolbar.setMode('node');
 
-  nodeButton.classList.add('button-active');
-  edgeButton.classList.remove('button-active');
+nodeButton.addEventListener('click', e => {
+  Toolbar.setMode('node');
 });
 edgeButton.addEventListener('click', e => {
-  Toolbar.mode = 'edge';
-
-  nodeButton.classList.remove('button-active');
-  edgeButton.classList.add('button-active');
+  Toolbar.setMode('edge');
 });
