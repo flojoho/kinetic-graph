@@ -1,5 +1,7 @@
-import Vector from "../Vector";
-import Node from "./Node";
+import Vector from "../Vector.js";
+import Node from "./Node.js";
+import Edges from "./Edges.js";
+
 
 const edgeContainer = document.getElementById('edge-container') as HTMLElement;
 
@@ -12,6 +14,8 @@ export default class Edge {
     this.node1 = node1;
     this.node2 = node2;
     this.edgeView = new EdgeView(this.node1.pos, this.node2.pos);
+
+    Edges.add(this);
   }
 
   refresh() {
@@ -19,7 +23,7 @@ export default class Edge {
   }
 }
 
-class EdgeView {
+export class EdgeView {
   private start: Vector;
   private end: Vector;
   private line;
@@ -33,9 +37,11 @@ class EdgeView {
     
     edgeContainer.appendChild(line);
     this.line = line;
+
+    this.redraw();
   }
 
-  render() {
+  private redraw() {
     this.line.setAttribute('x1', this.start.x.toString());
     this.line.setAttribute('y1', this.start.y.toString());
     this.line.setAttribute('x2', this.end.x.toString());
@@ -46,6 +52,10 @@ class EdgeView {
     this.start = pos1;
     this.end = pos2;
 
-    this.render();
+    this.redraw();
+  }
+
+  remove() {
+    this.line.remove();
   }
 }

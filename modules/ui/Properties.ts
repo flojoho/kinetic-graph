@@ -1,16 +1,17 @@
 import Nodes from './Nodes.js';
+import Node from './Node.js';
 
-const nodeText = document.getElementById('node-text');
+const nodeText = document.getElementById('node-text') as HTMLInputElement;
 
-let selectedNode;
+let selectedNode: Node;
 
-const selectNode = (node) => {
+const selectNode = (node: Node) => {
   selectedNode = node;
 
   Nodes.get().forEach(node => node.disableHightlight());
   node.enableHighlight();
 
-  nodeText.value = node.text;
+  nodeText.value = node.text.toString();
 }
 
 const editText = () => {

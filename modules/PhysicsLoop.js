@@ -7,8 +7,6 @@ const repulsionCoefficient = 100;
 const attractionCoefficient = 0.002;
 const damping = 0.95;
 const physicsLoop = (nodes, edges) => {
-    // refactor:
-    // calculate new node velocities
     const totalForces = new Map();
     nodes.forEach(node => totalForces.set(node, new Vector(0, 0)));
     for (let i = 0; i < nodes.length; i++) {

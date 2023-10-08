@@ -1,6 +1,8 @@
 import Vector from '../Vector.js';
 import Properties from './Properties.js';
 import NodeDragger from '../NodeDragger.js';
+import EdgeDragger from '../EdgeDragger.js';
+import Toolbar from './Toolbar.js';
 
 const nodeContainer = document.getElementById('node-container') as HTMLElement;
 
@@ -38,9 +40,15 @@ export default class Node {
       e.preventDefault();
       e.stopPropagation();
 
-      if('node' === 'node') { // TODO: add toolbar logic
-        NodeDragger.node = this;
+      if(Toolbar.mode === 'node') {
+        NodeDragger.start(this);
+      } else if(Toolbar.mode === 'edge') {
+        EdgeDragger.start(this);
       }
+    });
+
+    this.div.addEventListener('mouseup', e => {
+      EdgeDragger.finish(this);
     });
 
     this.div.addEventListener('dblclick', e => {
@@ -50,7 +58,7 @@ export default class Node {
     });
   }
 
-  render() {
+  private render() {
     this.div = document.createElement('div');
     this.div.classList.add('node');
     this.div.style.width = `${this.width}px`;

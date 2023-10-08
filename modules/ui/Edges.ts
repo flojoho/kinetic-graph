@@ -6,13 +6,15 @@ const edgeContainer = document.getElementById('edge-container') as HTMLElement;
 
 edgeContainer.setAttribute("viewBox", `0 0 ${ main.offsetWidth } ${ main.offsetHeight }`);
 
-const nodes = Nodes.get();
-const edges = [
-  new Edge(nodes[0], nodes[1])
-];
+// const nodes = Nodes.get();
+const edges: Edge[] = [];
 
 const get = () => {
   return edges;
 }
 
-export default { get };
+const add = (edge: Edge) => {
+  edges.push(edge);
+}
+
+export default { get, add };

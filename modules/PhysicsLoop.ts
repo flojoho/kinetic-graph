@@ -14,13 +14,6 @@ const damping = 0.95;
 
 const physicsLoop = (nodes: Node[], edges: Edge[]) => {
 
-  // refactor:
-  // calculate new node velocities
-
-
-
-
-
   const totalForces = new Map();
   nodes.forEach(node => totalForces.set(node, new Vector(0, 0)));
 
