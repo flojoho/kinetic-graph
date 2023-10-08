@@ -57,6 +57,11 @@ button {
   border: 1px var(--white) solid;
 }
 
+.button-active {
+  background-color: var(--white);
+  color: var(--black);
+}
+
 
 
 #edge-container {
