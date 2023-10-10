@@ -2,7 +2,6 @@ import Vector from "../Vector.js";
 import Node from "./Node.js";
 import Edges from "./Edges.js";
 
-
 const edgeContainer = document.getElementById('edge-container') as HTMLElement;
 
 export default class Edge {
@@ -33,7 +32,7 @@ export class EdgeView {
     this.end = end;
 
     const line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-    line.setAttribute('style', 'stroke: var(--white); stroke-width: var(--stroke-width)');
+    line.setAttribute('style', 'stroke: var(--white); stroke-width: var(--edge-width)');
     
     edgeContainer.appendChild(line);
     this.line = line;

@@ -16,7 +16,7 @@ export class EdgeView {
         this.start = start;
         this.end = end;
         const line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-        line.setAttribute('style', 'stroke: var(--white); stroke-width: var(--stroke-width)');
+        line.setAttribute('style', 'stroke: var(--white); stroke-width: var(--edge-width)');
         edgeContainer.appendChild(line);
         this.line = line;
         this.redraw();

@@ -8,9 +8,9 @@ import NodeDragger from './NodeDragger.js';
 
 const fps = 60;
 
-const repulsionCoefficient = 100;
+const repulsionCoefficient = 60;
 const attractionCoefficient = 0.002;
-const damping = 0.95;
+const damping = 0.97;
 
 const physicsLoop = (nodes: Node[], edges: Edge[]) => {
 

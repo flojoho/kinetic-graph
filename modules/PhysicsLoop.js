@@ -3,9 +3,9 @@ import Nodes from './ui/Nodes.js';
 import Edges from './ui/Edges.js';
 import NodeDragger from './NodeDragger.js';
 const fps = 60;
-const repulsionCoefficient = 100;
+const repulsionCoefficient = 60;
 const attractionCoefficient = 0.002;
-const damping = 0.95;
+const damping = 0.97;
 const physicsLoop = (nodes, edges) => {
     const totalForces = new Map();
     nodes.forEach(node => totalForces.set(node, new Vector(0, 0)));

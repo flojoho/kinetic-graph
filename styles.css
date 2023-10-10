@@ -6,6 +6,7 @@
   --white: #dddddd;
 
   --stroke-width: 2px;
+  --edge-width: 4px;
 }
 
 * {
