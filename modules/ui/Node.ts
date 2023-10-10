@@ -25,8 +25,8 @@ export default class Node {
     }
     
     this.vel = new Vector(0, 0);
-    this.width = 150;
-    this.height = 150;
+    this.width = 125;
+    this.height = 125;
     this.text = 'some text'
     this.render();
 

@@ -5,14 +5,14 @@
   --dark-gray: #303030;
   --white: #dddddd;
 
-  --stroke-width: 2px;
-  --edge-width: 4px;
+  --stroke-width: 1.5px;
+  --edge-width: 3px;
 }
 
 * {
   box-sizing: border-box;
   font-family: monospace;
-  font-size: 20px;
+  font-size: 1.1rem;
   box-sizing: border-box;
   color: var(--white);
 }
@@ -85,7 +85,7 @@ button {
   border: var(--stroke-width) var(--white) solid;
   background-color: var(--dark-gray);
   border-radius: 50%;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-family: monospace;
   padding: 10px;
   text-align: center;

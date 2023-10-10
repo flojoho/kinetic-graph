@@ -16,8 +16,8 @@ export default class Node {
             this.pos = new Vector(Math.random() * stageWidth, Math.random() * stageHeight);
         }
         this.vel = new Vector(0, 0);
-        this.width = 150;
-        this.height = 150;
+        this.width = 125;
+        this.height = 125;
         this.text = 'some text';
         this.render();
         this.div.addEventListener('click', e => {

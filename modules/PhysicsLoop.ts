@@ -8,7 +8,7 @@ import NodeDragger from './NodeDragger.js';
 
 const fps = 60;
 
-const repulsionCoefficient = 60;
+const repulsionCoefficient = 50;
 const attractionCoefficient = 0.002;
 const damping = 0.97;
 
