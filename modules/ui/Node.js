@@ -8,7 +8,6 @@ const stageWidth = nodeContainer.offsetWidth;
 const stageHeight = nodeContainer.offsetHeight;
 export default class Node {
     constructor(x, y) {
-        this.div = null;
         if (typeof x === 'number' && typeof y === 'number') {
             this.pos = new Vector(x, y);
         }
@@ -19,7 +18,12 @@ export default class Node {
         this.width = 125;
         this.height = 125;
         this.text = 'some text';
-        this.render();
+        this.div = document.createElement('div');
+        this.div.classList.add('node');
+        this.div.style.width = `${this.width}px`;
+        this.div.style.height = `${this.height}px`;
+        this.div.textContent = this.text;
+        nodeContainer.appendChild(this.div);
         this.div.addEventListener('click', e => {
             e.stopPropagation();
             Properties.selectNode(this);
@@ -43,12 +47,6 @@ export default class Node {
         });
     }
     render() {
-        this.div = document.createElement('div');
-        this.div.classList.add('node');
-        this.div.style.width = `${this.width}px`;
-        this.div.style.height = `${this.height}px`;
-        this.div.textContent = this.text;
-        nodeContainer.appendChild(this.div);
     }
     refresh() {
         this.div.style.left = `${this.pos.x - this.width / 2}px`;

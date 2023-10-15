@@ -10,12 +10,12 @@ const stageWidth = nodeContainer.offsetWidth;
 const stageHeight = nodeContainer.offsetHeight;
 
 export default class Node {
-  private div = null;
+  private div;
   pos: Vector;
   vel: Vector;
   width: number;
   height: number;
-  text: String;
+  text: string;
   
   constructor(x: number, y: number) {
     if(typeof x === 'number' && typeof y === 'number') {
@@ -27,8 +27,14 @@ export default class Node {
     this.vel = new Vector(0, 0);
     this.width = 125;
     this.height = 125;
-    this.text = 'some text'
-    this.render();
+    this.text = 'some text';
+
+    this.div = document.createElement('div');
+    this.div.classList.add('node');
+    this.div.style.width = `${this.width}px`;
+    this.div.style.height = `${this.height}px`;
+    this.div.textContent = this.text;
+    nodeContainer.appendChild(this.div);
 
     this.div.addEventListener('click', e => {
       e.stopPropagation();
@@ -59,12 +65,6 @@ export default class Node {
   }
 
   private render() {
-    this.div = document.createElement('div');
-    this.div.classList.add('node');
-    this.div.style.width = `${this.width}px`;
-    this.div.style.height = `${this.height}px`;
-    this.div.textContent = this.text;
-    nodeContainer.appendChild(this.div);
   }
 
   refresh() {
@@ -100,7 +100,7 @@ export default class Node {
     this.div.style.boxShadow = 'none';
   }
 
-  changeText(text: String) {
+  changeText(text: string) {
     this.text = text;
     this.div.textContent = text;
   }
