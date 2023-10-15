@@ -7,13 +7,8 @@ const nodeContainer = document.getElementById('node-container');
 const stageWidth = nodeContainer.offsetWidth;
 const stageHeight = nodeContainer.offsetHeight;
 export default class Node {
-    constructor(x, y) {
-        if (typeof x === 'number' && typeof y === 'number') {
-            this.pos = new Vector(x, y);
-        }
-        else {
-            this.pos = new Vector(Math.random() * stageWidth, Math.random() * stageHeight);
-        }
+    constructor(x = Math.random() * stageWidth, y = Math.random() * stageHeight) {
+        this.pos = new Vector(x, y);
         this.vel = new Vector(0, 0);
         this.width = 125;
         this.height = 125;

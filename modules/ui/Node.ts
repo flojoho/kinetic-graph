@@ -17,12 +17,8 @@ export default class Node {
   height: number;
   text: string;
   
-  constructor(x: number, y: number) {
-    if(typeof x === 'number' && typeof y === 'number') {
-      this.pos = new Vector(x, y);
-    } else {
-      this.pos = new Vector(Math.random() * stageWidth, Math.random() * stageHeight);
-    }
+  constructor(x: number = Math.random() * stageWidth, y: number = Math.random() * stageHeight) {
+    this.pos = new Vector(x, y);
     
     this.vel = new Vector(0, 0);
     this.width = 125;
