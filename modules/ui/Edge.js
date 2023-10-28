@@ -1,5 +1,5 @@
 import Edges from "./Edges.js";
-const edgeContainer = document.getElementById('edge-container');
+import Line from "./Line.js";
 export default class Edge {
     constructor(node1, node2) {
         this.node1 = node1;
@@ -15,22 +15,12 @@ export class EdgeView {
     constructor(start, end) {
         this.start = start;
         this.end = end;
-        const line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-        line.setAttribute('style', 'stroke: var(--white); stroke-width: var(--edge-width)');
-        edgeContainer.appendChild(line);
-        this.line = line;
-        this.redraw();
-    }
-    redraw() {
-        this.line.setAttribute('x1', this.start.x.toString());
-        this.line.setAttribute('y1', this.start.y.toString());
-        this.line.setAttribute('x2', this.end.x.toString());
-        this.line.setAttribute('y2', this.end.y.toString());
+        this.line = new Line(start, end);
     }
     update(pos1, pos2) {
         this.start = pos1;
         this.end = pos2;
-        this.redraw();
+        this.line.update(pos1, pos2);
     }
     remove() {
         this.line.remove();
