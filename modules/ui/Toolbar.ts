@@ -1,8 +1,9 @@
 
-type Mode = 'node' | 'edge';
+type Mode = 'node' | 'edge' | 'arrow';
 
 const nodeButton = document.getElementById('node-button') as HTMLElement;
 const edgeButton = document.getElementById('edge-button') as HTMLElement;
+const arrowButton = document.getElementById('arrow-button') as HTMLElement;
 
 export default class Toolbar {
   static mode: Mode = 'edge';
@@ -10,12 +11,16 @@ export default class Toolbar {
   static setMode(mode: Mode) {
     Toolbar.mode = mode;
 
+    const buttons = [nodeButton, edgeButton, arrowButton];
+
+    buttons.forEach(button => button.classList.remove('button-active'));
+
     if(mode === 'node') {
       nodeButton.classList.add('button-active');
-      edgeButton.classList.remove('button-active');
     } else if(mode === 'edge') {
-      nodeButton.classList.remove('button-active');
       edgeButton.classList.add('button-active');
+    } else if(mode === 'arrow') {
+      arrowButton.classList.add('button-active');
     }
   }
 }
@@ -27,4 +32,7 @@ nodeButton.addEventListener('click', e => {
 });
 edgeButton.addEventListener('click', e => {
   Toolbar.setMode('edge');
+});
+arrowButton.addEventListener('click', e => {
+  Toolbar.setMode('arrow');
 });

@@ -6,12 +6,13 @@ import Toolbar from './Toolbar.js';
 const nodeContainer = document.getElementById('node-container');
 const stageWidth = nodeContainer.offsetWidth;
 const stageHeight = nodeContainer.offsetHeight;
+export const radius = 125 / 2;
 export default class Node {
     constructor(x = Math.random() * stageWidth, y = Math.random() * stageHeight) {
         this.pos = new Vector(x, y);
         this.vel = new Vector(0, 0);
-        this.width = 125;
-        this.height = 125;
+        this.width = 2 * radius;
+        this.height = 2 * radius;
         this.text = 'some text';
         this.div = document.createElement('div');
         this.div.classList.add('node');
@@ -30,7 +31,10 @@ export default class Node {
                 NodeDragger.start(this);
             }
             else if (Toolbar.mode === 'edge') {
-                EdgeDragger.start(this);
+                EdgeDragger.start(this, 'none');
+            }
+            else if (Toolbar.mode === 'arrow') {
+                EdgeDragger.start(this, 'to');
             }
         });
         this.div.addEventListener('mouseup', e => {

@@ -9,6 +9,8 @@ const nodeContainer = document.getElementById('node-container') as HTMLElement;
 const stageWidth = nodeContainer.offsetWidth;
 const stageHeight = nodeContainer.offsetHeight;
 
+export const radius = 125/2;
+
 export default class Node {
   private div;
   pos: Vector;
@@ -21,8 +23,8 @@ export default class Node {
     this.pos = new Vector(x, y);
     
     this.vel = new Vector(0, 0);
-    this.width = 125;
-    this.height = 125;
+    this.width = 2*radius;
+    this.height = 2*radius;
     this.text = 'some text';
 
     this.div = document.createElement('div');
@@ -45,7 +47,9 @@ export default class Node {
       if(Toolbar.mode === 'node') {
         NodeDragger.start(this);
       } else if(Toolbar.mode === 'edge') {
-        EdgeDragger.start(this);
+        EdgeDragger.start(this, 'none');
+      } else if(Toolbar.mode === 'arrow') {
+        EdgeDragger.start(this, 'to');
       }
     });
 

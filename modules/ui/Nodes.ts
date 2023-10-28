@@ -9,7 +9,7 @@ const nodeContainer = document.getElementById('node-container') as HTMLElement;
 const nodeCount = 2;
 
 let nodes = Array(nodeCount).fill(0).map(node => new Node());
-new Edge(nodes[0], nodes[1]);
+new Edge(nodes[0], nodes[1], 'to');
 
 nodeContainer.addEventListener('mousedown', e => {
   e.preventDefault();
