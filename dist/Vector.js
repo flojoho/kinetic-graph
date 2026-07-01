@@ -6,10 +6,12 @@ export default class Vector {
     add(vector) {
         this.x += vector.x;
         this.y += vector.y;
+        return this;
     }
     subtract(vector) {
         this.x -= vector.x;
         this.y -= vector.y;
+        return this;
     }
     plus(vector) {
         return new Vector(this.x + vector.x, this.y + vector.y);
@@ -23,6 +25,7 @@ export default class Vector {
     magnify(scalar) {
         this.x *= scalar;
         this.y *= scalar;
+        return this;
     }
     times(scalar) {
         return new Vector(scalar * this.x, scalar * this.y);
@@ -36,6 +39,10 @@ export default class Vector {
         return new Vector(x, y);
         // cos -sin   x  =  x cos - y sin
         // sin cos    y  =  x sin + y cos
+    }
+    unitVector() {
+        const length = this.length();
+        return new Vector(this.x / length, this.y / length);
     }
     length() {
         return Math.sqrt(this.x * this.x + this.y * this.y);

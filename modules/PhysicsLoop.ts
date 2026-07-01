@@ -8,8 +8,9 @@ import NodeDragger from './NodeDragger.js';
 
 const fps = 60;
 
-const repulsionCoefficient = 50;
-const attractionCoefficient = 0.002;
+const repulsionCoefficient = 120;
+const attractionCoefficient = 0.3;
+const springCoefficient = 0.002;
 const damping = 0.97;
 
 const physicsLoop = (nodes: Node[], edges: Edge[]) => {
@@ -26,7 +27,9 @@ const physicsLoop = (nodes: Node[], edges: Edge[]) => {
       }
 
       let acceleration = nodes[j].pos.to(nodes[i].pos);
-      acceleration.magnify(repulsionCoefficient / acceleration.lengthSquared());
+      acceleration
+        .magnify(repulsionCoefficient / acceleration.lengthSquared())
+        .subtract(acceleration.unitVector().magnify(attractionCoefficient));
 
       totalForces.get(nodes[i]).add(acceleration);
       totalForces.get(nodes[j]).subtract(acceleration);
@@ -37,7 +40,7 @@ const physicsLoop = (nodes: Node[], edges: Edge[]) => {
     const { node1, node2 } = edge;
 
     let acceleration = node1.pos.to(node2.pos);
-    acceleration.magnify(attractionCoefficient);
+    acceleration.magnify(springCoefficient);
 
     totalForces.get(node1).add(acceleration);
     totalForces.get(node2).subtract(acceleration);

@@ -12,11 +12,13 @@ export default class Vector {
   add(vector: Vector) {
     this.x += vector.x;
     this.y += vector.y;
+    return this;
   }
 
   subtract(vector: Vector) {
     this.x -= vector.x;
     this.y -= vector.y;
+    return this;
   }
 
   plus(vector: Vector) {
@@ -34,6 +36,7 @@ export default class Vector {
   magnify(scalar: number) {
     this.x *= scalar;
     this.y *= scalar;
+    return this;
   }
   times(scalar: number) {
     return new Vector(scalar * this.x, scalar * this.y);
@@ -52,6 +55,14 @@ export default class Vector {
 
     // cos -sin   x  =  x cos - y sin
     // sin cos    y  =  x sin + y cos
+  }
+
+  unitVector() {
+    const length = this.length();
+    return new Vector(
+      this.x / length,
+      this.y / length
+    );
   }
 
   length() {
