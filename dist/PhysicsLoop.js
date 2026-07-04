@@ -2,9 +2,10 @@ import Vector from './Vector.js';
 import Nodes from './ui/Nodes.js';
 import Edges from './ui/Edges.js';
 import NodeDragger from './NodeDragger.js';
+import Stage from './ui/Stage.js';
 const fps = 60;
 const repulsionCoefficient = 120;
-const centeringCoefficient = 0.0001;
+const centeringCoefficient = 0.004;
 const springCoefficient = 0.002;
 const dampingCoefficient = 0.97;
 const calculateNodeRepulsionForce = (node1, node2) => {
@@ -16,8 +17,8 @@ const calculateEdgeForce = (node1, node2) => {
     return displacement.times(springCoefficient);
 };
 const calculateCenteringForce = (node) => {
-    const originDisplacement = node.pos;
-    return node.pos.times(-centeringCoefficient);
+    const centerDisplacement = new Vector(Stage.width / 2, Stage.height / 2).to(node.pos);
+    return centerDisplacement.times(-centeringCoefficient);
 };
 const physicsLoop = (nodes, edges) => {
     const totalForces = new Map();
