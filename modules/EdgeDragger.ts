@@ -1,5 +1,5 @@
 import Edge, { EdgeView } from './ui/Edge.js';
-import Nodes from './ui/Nodes.js';
+import { mouseToStageCoordinates } from './ui/Stage.js';
 import Node from './ui/Node.js';
 import { Direction } from './ui/Edge.js';
 
@@ -18,7 +18,7 @@ export default class EdgeDragger {
     if(this.edgeView && this.node) {
       this.edgeView.update(
         this.node.pos,
-        Nodes.toStageCoordinates(clientX, clientY)
+        mouseToStageCoordinates(clientX, clientY)
       );
     }
   }

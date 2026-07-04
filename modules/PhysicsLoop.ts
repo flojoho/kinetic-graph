@@ -8,7 +8,7 @@ import NodeDragger from './NodeDragger.js';
 const fps = 60;
 
 const repulsionCoefficient = 120;
-const attractionCoefficient = 0.3;
+const centeringCoefficient = 0.0001;
 const springCoefficient = 0.002;
 const dampingCoefficient = 0.97;
 
@@ -16,14 +16,16 @@ const calculateNodeRepulsionForce = (node1: Node, node2: Node) => {
   const displacement = node2.pos.to(node1.pos);
   return displacement.times(repulsionCoefficient / displacement.lengthSquared());
 };
-
 const calculateEdgeForce = (node1: Node, node2: Node) => {
   const displacement = node1.pos.to(node2.pos);
   return displacement.times(springCoefficient);
 };
+const calculateCenteringForce = (node: Node) => {
+  const originDisplacement = node.pos;
+  return node.pos.times(-centeringCoefficient);
+};
 
 const physicsLoop = (nodes: Node[], edges: Edge[]) => {
-
   const totalForces = new Map();
   nodes.forEach(node => totalForces.set(node, new Vector(0, 0)));
 
@@ -49,6 +51,11 @@ const physicsLoop = (nodes: Node[], edges: Edge[]) => {
     const edgeForce = calculateEdgeForce(node1, node2);
     totalForces.get(node1).add(edgeForce);
     totalForces.get(node2).subtract(edgeForce);
+  });
+
+  nodes.forEach(node => {
+    const centeringForce = calculateCenteringForce(node);
+    totalForces.get(node).add(centeringForce);
   });
 
   nodes = nodes.map(node => {

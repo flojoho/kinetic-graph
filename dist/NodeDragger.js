@@ -1,4 +1,4 @@
-import Nodes from './ui/Nodes.js';
+import { mouseToStageCoordinates } from './ui/Stage.js';
 import Vector from './Vector.js';
 export default class NodeDragger {
     static start(node) {
@@ -6,7 +6,7 @@ export default class NodeDragger {
     }
     static move(clientX, clientY, movementX, movementY) {
         if (this.node) {
-            this.node.pos = Nodes.toStageCoordinates(clientX, clientY);
+            this.node.pos = mouseToStageCoordinates(clientX, clientY);
             this.node.vel = new Vector(movementX, movementY);
         }
     }

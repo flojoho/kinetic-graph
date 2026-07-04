@@ -3,12 +3,11 @@ import Properties from './Properties.js';
 import NodeDragger from '../NodeDragger.js';
 import EdgeDragger from '../EdgeDragger.js';
 import Toolbar from './Toolbar.js';
+import Stage from './Stage.js';
 const nodeContainer = document.getElementById('node-container');
-const stageWidth = nodeContainer.offsetWidth;
-const stageHeight = nodeContainer.offsetHeight;
 export const radius = 125 / 2;
 export default class Node {
-    constructor(x = Math.random() * stageWidth, y = Math.random() * stageHeight) {
+    constructor(x = Math.random() * Stage.width, y = Math.random() * Stage.height) {
         this.pos = new Vector(x, y);
         this.vel = new Vector(0, 0);
         this.width = 2 * radius;
@@ -56,17 +55,17 @@ export default class Node {
             this.vel.x = 0;
             this.pos.x = this.width / 2;
         }
-        if (this.pos.x > (stageWidth - this.width / 2)) {
+        if (this.pos.x > (Stage.width - this.width / 2)) {
             this.vel.x = 0;
-            this.pos.x = stageWidth - this.width / 2;
+            this.pos.x = Stage.width - this.width / 2;
         }
         if (this.pos.y < this.height / 2) {
             this.vel.y = 0;
             this.pos.y = this.height / 2;
         }
-        if (this.pos.y > (stageHeight - this.height / 2)) {
+        if (this.pos.y > (Stage.height - this.height / 2)) {
             this.vel.y = 0;
-            this.pos.y = stageHeight - this.height / 2;
+            this.pos.y = Stage.height - this.height / 2;
         }
     }
     enableHighlight() {
