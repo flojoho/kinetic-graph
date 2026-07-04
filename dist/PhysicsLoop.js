@@ -6,43 +6,49 @@ const fps = 60;
 const repulsionCoefficient = 120;
 const attractionCoefficient = 0.3;
 const springCoefficient = 0.002;
-const damping = 0.97;
+const dampingCoefficient = 0.97;
+const calculateNodeRepulsionForce = (node1, node2) => {
+    const displacement = node2.pos.to(node1.pos);
+    return displacement.times(repulsionCoefficient / displacement.lengthSquared());
+};
+const calculateEdgeForce = (node1, node2) => {
+    const displacement = node1.pos.to(node2.pos);
+    return displacement.times(springCoefficient);
+};
 const physicsLoop = (nodes, edges) => {
     const totalForces = new Map();
     nodes.forEach(node => totalForces.set(node, new Vector(0, 0)));
     for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
-            if (nodes[i].pos.x === nodes[j].pos.x && nodes[i].pos.y === nodes[j].pos.y) {
+            const node1 = nodes[i];
+            const node2 = nodes[j];
+            if (node1.pos.x === node2.pos.x && node1.pos.y === node2.pos.y) {
                 console.log('same');
-                nodes[i].pos.add(new Vector(10 * Math.random(), 10 * Math.random()));
+                node1.pos.add(new Vector(10 * Math.random(), 10 * Math.random()));
             }
-            let acceleration = nodes[j].pos.to(nodes[i].pos);
-            acceleration
-                .magnify(repulsionCoefficient / acceleration.lengthSquared())
-                .subtract(acceleration.unitVector().magnify(attractionCoefficient));
-            totalForces.get(nodes[i]).add(acceleration);
-            totalForces.get(nodes[j]).subtract(acceleration);
+            const repulsionForce = calculateNodeRepulsionForce(node1, node2);
+            totalForces.get(node1).add(repulsionForce);
+            totalForces.get(node2).subtract(repulsionForce);
         }
     }
     edges.forEach(edge => {
         const { node1, node2 } = edge;
-        let acceleration = node1.pos.to(node2.pos);
-        acceleration.magnify(springCoefficient);
-        totalForces.get(node1).add(acceleration);
-        totalForces.get(node2).subtract(acceleration);
+        const edgeForce = calculateEdgeForce(node1, node2);
+        totalForces.get(node1).add(edgeForce);
+        totalForces.get(node2).subtract(edgeForce);
     });
-    nodes = nodes.map((node, i) => {
+    nodes = nodes.map(node => {
         node.vel.add(totalForces.get(node));
         return node;
     })
-        .map((node) => {
+        .map(node => {
         if (NodeDragger.node === node)
             return node;
         node.pos.add(node.vel);
         return node;
     })
         .map(node => {
-        node.vel.magnify(damping);
+        node.vel.magnify(dampingCoefficient);
         return node;
     })
         .map(node => {
